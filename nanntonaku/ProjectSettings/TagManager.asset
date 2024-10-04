@@ -8,6 +8,8 @@ TagManager:
   - Wall_L
   - Wall_U
   - Wall_D
+  - Wall_middleU
+  - Wall_middleD
   layers:
   - Default
   - TransparentFX
