@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour
     public float xSpeed = 3.0f;             //横方向の移動スピード
     public float ySpeed = 60.0f;            //上方向の移動スピード
     // Start is called before the first frame update
+    Goal goalFlag;
+
     void Start()
     {
         isWallHit_R = false;            //初期化
@@ -25,60 +29,75 @@ public class Player : MonoBehaviour
         isWallHit_middleD = false;      //初期化
         isGravity = false;              //初期化
         isFalling = false;              //初期化
+
+        GameObject goalf = GameObject.FindWithTag("Goal");
+        if(goalf != null)
+        {
+            goalFlag = goalf.GetComponent<Goal>();
+        }
+
     }
 
     void Update()
     {
-        if (isWallHit_R == true)//右壁についたとき
+        
+        if (goalFlag.isGoal_ == false)
         {
-            //左移動
-            transform.position -= transform.right * xSpeed * Time.deltaTime;
-        }
-        if (isWallHit_L == true)//左壁についたとき
-        {
-           //右移動
-            transform.position += transform.right * xSpeed * Time.deltaTime;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))//スペースキーが押されたとき
-        {
-            if (isFalling == false)//落下フラグが立ってなければ
+            if (isWallHit_R == true)//右壁についたとき
             {
-                isGravity = true;//重力反転フラグを立てる
+                //左移動
+                transform.position -= transform.right * xSpeed * Time.deltaTime;
             }
-        }
-        if (isGravity == true)//重力反転フラグが立ったとき
-        {
-            if (isWallHit_U == true|| isWallHit_middleU==true)//上壁についていれば
+            if (isWallHit_L == true)//左壁についたとき
             {
-                //下移動
-                transform.position -= transform.forward * ySpeed * Time.deltaTime;
-               
+                //右移動
+                transform.position += transform.right * xSpeed * Time.deltaTime;
             }
-
-            if (isWallHit_D == true|| isWallHit_middleD==true)//下壁についていれば
+            if (Input.GetKeyDown(KeyCode.Space))//スペースキーが押されたとき
             {
-                //上移動
-                transform.position += transform.forward * ySpeed * Time.deltaTime;
-                
-            }
-        }
-        if(isFalling == true)//落下フラグが立ったとき
-        {
-            if (isGravity == false)//重力反転フラグが立っていなければ
-            {
-                if (isWallHit_middleU == true)
+                if (isFalling == false)//落下フラグが立ってなければ
                 {
-                    //上移動
-                    transform.position += transform.forward * ySpeed * Time.deltaTime;
+                    isGravity = true;//重力反転フラグを立てる
                 }
-
-                if (isWallHit_middleD == true)
+            }
+            if (isGravity == true)//重力反転フラグが立ったとき
+            {
+                if (isWallHit_U == true || isWallHit_middleU == true)//上壁についていれば
                 {
                     //下移動
                     transform.position -= transform.forward * ySpeed * Time.deltaTime;
+
+                }
+
+                if (isWallHit_D == true || isWallHit_middleD == true)//下壁についていれば
+                {
+                    //上移動
+                    transform.position += transform.forward * ySpeed * Time.deltaTime;
+
                 }
             }
-            
+            if (isFalling == true)//落下フラグが立ったとき
+            {
+                if (isGravity == false)//重力反転フラグが立っていなければ
+                {
+                    if (isWallHit_middleU == true)
+                    {
+                        //上移動
+                        transform.position += transform.forward * ySpeed * Time.deltaTime;
+                    }
+
+                    if (isWallHit_middleD == true)
+                    {
+                        //下移動
+                        transform.position -= transform.forward * ySpeed * Time.deltaTime;
+                    }
+                }
+
+            }
+        }
+        else
+        {
+
         }
     }
 
@@ -139,4 +158,7 @@ public class Player : MonoBehaviour
             isFalling = true;
        }
     }
+
+
+    
 }
