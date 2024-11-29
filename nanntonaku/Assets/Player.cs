@@ -66,14 +66,12 @@ public class Player : MonoBehaviour
                 {
                     //‰ºˆÚ“®
                     transform.position -= transform.forward * ySpeed * Time.deltaTime;
-
                 }
 
                 if (isWallHit_D == true || isWallHit_middleD == true)//‰º•Ç‚É‚Â‚¢‚Ä‚¢‚ê‚Î
                 {
                     //ãˆÚ“®
                     transform.position += transform.forward * ySpeed * Time.deltaTime;
-
                 }
             }
             if (isFalling == true)//—‰ºƒtƒ‰ƒO‚ª—§‚Á‚½‚Æ‚«
