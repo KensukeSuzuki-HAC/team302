@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
         if (goalFlag.isGoal_ == false)
         {
             if (isWallHit_R == true)//‰E•Ç‚É‚Â‚¢‚½‚Æ‚«
@@ -90,12 +89,7 @@ public class Player : MonoBehaviour
                         transform.position -= transform.forward * ySpeed * Time.deltaTime;
                     }
                 }
-
             }
-        }
-        else
-        {
-
         }
     }
 
@@ -156,7 +150,4 @@ public class Player : MonoBehaviour
             isFalling = true;
        }
     }
-
-
-    
 }
