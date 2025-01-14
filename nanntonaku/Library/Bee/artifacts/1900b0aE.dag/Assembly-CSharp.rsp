@@ -359,6 +359,7 @@
 "Assets/Coin.cs"
 "Assets/Goal.cs"
 "Assets/Player.cs"
+"Assets/Player2.cs"
 -langversion:9.0
 
 /deterministic

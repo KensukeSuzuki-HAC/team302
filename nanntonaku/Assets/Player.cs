@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
     public bool isWallHit_R;                //右壁接触のフラグ
@@ -24,68 +23,65 @@ public class Player : MonoBehaviour
         isWallHit_R = false;            //初期化
         isWallHit_L = true;	            //初期化
         isWallHit_U = false;            //初期化
-        isWallHit_D = true;             //初期化
-        isWallHit_middleU = false;      //初期化
+        isWallHit_D = true;            //初期化
+        isWallHit_middleU = false;     //初期化
         isWallHit_middleD = false;      //初期化
         isGravity = false;              //初期化
         isFalling = false;              //初期化
 
         GameObject goalf = GameObject.FindWithTag("Goal");
-        if(goalf != null)
+        if (goalf != null)
         {
             goalFlag = goalf.GetComponent<Goal>();
         }
-
     }
 
     void Update()
     {
-        if (goalFlag.isGoal_ == false)
+        if (goalFlag.isGoal_ == false)//右壁についたとき
         {
-            if (isWallHit_R == true)//右壁についたとき
+            if (isWallHit_R == true)//落下フラグが立ってなければ
             {
-                //左移動
                 transform.position -= transform.right * xSpeed * Time.deltaTime;
+                //重力反転フラグを立てる
             }
-            if (isWallHit_L == true)//左壁についたとき
+            if (isWallHit_L == true)
             {
-                //右移動
                 transform.position += transform.right * xSpeed * Time.deltaTime;
             }
-            if (Input.GetKeyDown(KeyCode.Space))//スペースキーが押されたとき
+            if (Input.GetKeyDown(KeyCode.Space))//下壁についていれば
             {
-                if (isFalling == false)//落下フラグが立ってなければ
+                if (isFalling == false)//?????t???O?????????????
                 {
-                    isGravity = true;//重力反転フラグを立てる
+                    isGravity = true;//?d????]?t???O?????
                 }
             }
-            if (isGravity == true)//重力反転フラグが立ったとき
+            if (isGravity == true)
             {
-                if (isWallHit_U == true || isWallHit_middleU == true)//上壁についていれば
+                if (isWallHit_U == true || isWallHit_middleU == true)//????????????
                 {
-                    //下移動
+                    //?????
                     transform.position -= transform.forward * ySpeed * Time.deltaTime;
                 }
 
-                if (isWallHit_D == true || isWallHit_middleD == true)//下壁についていれば
+                if (isWallHit_D == true || isWallHit_middleD == true)
                 {
-                    //上移動
                     transform.position += transform.forward * ySpeed * Time.deltaTime;
                 }
             }
-            if (isFalling == true)//落下フラグが立ったとき
+            if (isFalling == true)//?????t???O???????????
             {
-                if (isGravity == false)//重力反転フラグが立っていなければ
+                if (isGravity == false)//?d????]?t???O???????????????
                 {
                     if (isWallHit_middleU == true)
                     {
-                        //上移動
+                        //????
                         transform.position += transform.forward * ySpeed * Time.deltaTime;
                     }
 
                     if (isWallHit_middleD == true)
                     {
-                        //下移動
+                        //?????
                         transform.position -= transform.forward * ySpeed * Time.deltaTime;
                     }
                 }
@@ -95,14 +91,15 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Wall_R"))
+        if (collision.gameObject.CompareTag("Wall_R"))
         {
             isWallHit_R = true;
             isWallHit_L = false;
+
         }
         if (collision.gameObject.CompareTag("Wall_L"))
         {
-            isWallHit_R =false;
+            isWallHit_R = false;
             isWallHit_L = true;
         }
         if (collision.gameObject.CompareTag("Wall_U"))
@@ -117,7 +114,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall_D"))
         {
             isWallHit_U = false;
-            isWallHit_D= true;
+            isWallHit_D = true;
             isWallHit_middleU = false;
             isWallHit_middleD = false;
             isGravity = false;
@@ -145,9 +142,9 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-       if(other.gameObject.CompareTag("Wall_middleU")|| other.gameObject.CompareTag("Wall_middleD"))
-       {
+        if (other.gameObject.CompareTag("Wall_middleU") || other.gameObject.CompareTag("Wall_middleD"))
+        {
             isFalling = true;
-       }
+        }
     }
 }
