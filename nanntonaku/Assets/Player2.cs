@@ -30,8 +30,16 @@ public class Player2 : MonoBehaviour
         isFalling = false;              //初期化
     }
 
+    // プレイヤーがゴール状態かどうかを判定するフラグ
+    private bool isAtGoal = false;
+
     void Update()
     {
+        if (isAtGoal) // ゴールについている場合は動きを止める
+        {
+            return;
+        }
+
         if (isWallHit_R == true)//右壁についたとき
         {
             //左移動
@@ -149,6 +157,13 @@ public class Player2 : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);//シーンを再読み込み
         }
+        else if (other.gameObject.CompareTag("Coin")) // コインに触れた場合
+        {
+            Destroy(other.gameObject); // コインを消去
+        }
+        else if (other.gameObject.CompareTag("Goal")) // ゴールに触れた場合
+        {
+            isAtGoal = true; // ゴールフラグを立てる
+        }
     }
 }
-

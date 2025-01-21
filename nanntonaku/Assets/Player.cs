@@ -51,16 +51,16 @@ public class Player : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space))//‰º•Ç‚É‚Â‚¢‚Ä‚¢‚ê‚Î
             {
-                if (isFalling == false)//?????t???O?????????????
+                if (isFalling == false)
                 {
-                    isGravity = true;//?d????]?t???O?????
+                    isGravity = true;
                 }
             }
             if (isGravity == true)
             {
-                if (isWallHit_U == true || isWallHit_middleU == true)//????????????
+                if (isWallHit_U == true || isWallHit_middleU == true)
                 {
-                    //?????
+                    
                     transform.position -= transform.forward * ySpeed * Time.deltaTime;
                 }
 
@@ -69,19 +69,19 @@ public class Player : MonoBehaviour
                     transform.position += transform.forward * ySpeed * Time.deltaTime;
                 }
             }
-            if (isFalling == true)//?????t???O???????????
+            if (isFalling == true)
             {
-                if (isGravity == false)//?d????]?t???O???????????????
+                if (isGravity == false)
                 {
                     if (isWallHit_middleU == true)
                     {
-                        //????
+                        
                         transform.position += transform.forward * ySpeed * Time.deltaTime;
                     }
 
                     if (isWallHit_middleD == true)
                     {
-                        //?????
+                        
                         transform.position -= transform.forward * ySpeed * Time.deltaTime;
                     }
                 }
